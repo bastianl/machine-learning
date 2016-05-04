@@ -11787,12 +11787,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[155]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import libraries</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">graphviz</span>
 </pre></div>
 
 </div>
@@ -11802,11 +11803,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[156]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read student data</span>
-<span class="n">student_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;student_intervention/student-data.csv&quot;</span><span class="p">)</span>
+<span class="n">student_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;student-data.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student data read successfully!&quot;</span><span class="p">)</span>
 <span class="c1"># Note: The last column &#39;passed&#39; is the target/label, all other are feature columns</span>
 </pre></div>
@@ -11850,7 +11851,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[157]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Compute desired values - replace each &#39;?&#39; with an appropriate expression/function call</span>
@@ -11858,7 +11859,7 @@ div#notebook {
 <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># exclude &#39;passed&#39; column</span>
 <span class="n">n_passed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">)</span>
 <span class="n">n_failed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
-<span class="n">grad_rate</span> <span class="o">=</span> <span class="n">n_passed</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_passed</span> <span class="o">+</span> <span class="n">n_failed</span><span class="p">)</span>
+<span class="n">grad_rate</span> <span class="o">=</span> <span class="n">n_passed</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_passed</span> <span class="o">+</span> <span class="n">n_failed</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># python 3 uses &quot;true division&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of students: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_students</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of students who passed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_passed</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of students who failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_failed</span><span class="p">))</span>
@@ -11880,7 +11881,7 @@ div#notebook {
 Number of students who passed: 265
 Number of students who failed: 130
 Number of features: 30
-Graduation rate of the class: 0.67%
+Graduation rate of the class: 67.09%
 </pre>
 </div>
 </div>
@@ -11904,7 +11905,7 @@ Graduation rate of the class: 0.67%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[158]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Extract feature (X) and target (y) columns</span>
@@ -11949,7 +11950,7 @@ Target column: passed
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[159]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Preprocess feature columns</span>
@@ -11999,7 +12000,7 @@ Target column: passed
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[160]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_all</span> <span class="o">=</span> <span class="n">student_data</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>  <span class="c1"># corresponding targets/labels</span>
@@ -12062,7 +12063,7 @@ Feature values:-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[161]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -12120,7 +12121,7 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[162]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train a model</span>
@@ -12148,11 +12149,11 @@ Test set: 95 samples
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[162]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.0019099712371826172</pre>
+<pre>0.005196094512939453</pre>
 </div>
 
 </div>
@@ -12163,17 +12164,17 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Predict on training set and compute F1 score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">f1_score</span>
 
-<span class="k">def</span> <span class="nf">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">metric_func</span><span class="o">=</span><span class="n">f1_score</span><span class="p">):</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">metric_func</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 
 <span class="n">train_f1_score</span> <span class="o">=</span> <span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F1 score for training set: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_f1_score</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
@@ -12189,7 +12190,7 @@ Test set: 95 samples
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>F1 score for training set: 0.8669724770642202
+<pre>F1 score for training set: 0.8108108108108109
 </pre>
 </div>
 </div>
@@ -12200,7 +12201,7 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[164]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Predict on test data</span>
@@ -12228,7 +12229,7 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[165]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train and predict using different training set sizes</span>
@@ -12246,7 +12247,7 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[191]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_and_evaluate_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">training_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))):</span>
@@ -12280,14 +12281,23 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[177]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeClassifier</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max Depth = None (all features used)&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">train_and_evaluate_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">))</span>
+
+<span class="c1"># Note, the base decision tree class overfits drastically, so we also show</span>
+<span class="c1"># performance of a simple decision tree stump.</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max Depth = 1&quot;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">train_and_evaluate_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_all</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">]])</span>
 </pre></div>
@@ -12299,6 +12309,69 @@ Test set: 95 samples
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>----------------------------------------
+Max Depth = None (all features used)
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_size</th>
+      <th>f1_train</th>
+      <th>f1_test</th>
+      <th>train_time</th>
+      <th>prediction_time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>1</td>
+      <td>0.776119</td>
+      <td>0.001009</td>
+      <td>0.000226</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200</td>
+      <td>1</td>
+      <td>0.715447</td>
+      <td>0.001204</td>
+      <td>0.000200</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>300</td>
+      <td>1</td>
+      <td>0.621849</td>
+      <td>0.001928</td>
+      <td>0.000338</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>----------------------------------------
+Max Depth = 1
+</pre>
+</div>
+</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -12321,24 +12394,24 @@ Test set: 95 samples
       <td>100</td>
       <td>0.816568</td>
       <td>0.774194</td>
-      <td>0.000891</td>
-      <td>0.000208</td>
+      <td>0.000693</td>
+      <td>0.000186</td>
     </tr>
     <tr>
       <th>1</th>
       <td>200</td>
       <td>0.831746</td>
       <td>0.802721</td>
-      <td>0.000513</td>
-      <td>0.000185</td>
+      <td>0.000426</td>
+      <td>0.000226</td>
     </tr>
     <tr>
       <th>2</th>
       <td>300</td>
       <td>0.810811</td>
       <td>0.812030</td>
-      <td>0.000571</td>
-      <td>0.000181</td>
+      <td>0.000714</td>
+      <td>0.000241</td>
     </tr>
   </tbody>
 </table>
@@ -12392,11 +12465,19 @@ Test set: 95 samples
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[168]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K = 5 (default)&quot;</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">train_and_evaluate_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K = 25&quot;</span><span class="p">)</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">train_and_evaluate_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">))</span>
@@ -12409,6 +12490,69 @@ Test set: 95 samples
 <div class="output_wrapper">
 <div class="output">
 
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>----------------------------------------
+K = 5 (default)
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_size</th>
+      <th>f1_train</th>
+      <th>f1_test</th>
+      <th>train_time</th>
+      <th>prediction_time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>0.855172</td>
+      <td>0.696296</td>
+      <td>0.000746</td>
+      <td>0.001193</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200</td>
+      <td>0.865248</td>
+      <td>0.740741</td>
+      <td>0.000542</td>
+      <td>0.002532</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>300</td>
+      <td>0.876404</td>
+      <td>0.733813</td>
+      <td>0.000783</td>
+      <td>0.003933</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>----------------------------------------
+K = 25
+</pre>
+</div>
+</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -12431,24 +12575,24 @@ Test set: 95 samples
       <td>100</td>
       <td>0.814371</td>
       <td>0.786667</td>
-      <td>0.002024</td>
-      <td>0.002635</td>
+      <td>0.000622</td>
+      <td>0.001318</td>
     </tr>
     <tr>
       <th>1</th>
       <td>200</td>
       <td>0.815047</td>
       <td>0.781457</td>
-      <td>0.000803</td>
-      <td>0.003920</td>
+      <td>0.000511</td>
+      <td>0.002430</td>
     </tr>
     <tr>
       <th>2</th>
       <td>300</td>
       <td>0.829569</td>
       <td>0.791946</td>
-      <td>0.000983</td>
-      <td>0.006878</td>
+      <td>0.000601</td>
+      <td>0.005903</td>
     </tr>
   </tbody>
 </table>
@@ -12472,11 +12616,11 @@ Test set: 95 samples
 </blockquote>
 </li>
 <li><p>What are the general applications of this model? What are its strengths and weaknesses?</p>
-<blockquote><p>KNN is another relatively simple algorithm that can easily be visualized and interpreted. However, performance can degrade at boundary conditions and when regions are not covered well with samples. Generally, we need a lot of data to cover our feature space; however, it appears that KNN performs very well on the test set even when trained on only 100 samples. However, if we are doing a lot of predictions compared to training, it may not be well suited for our task.</p>
+<blockquote><p>KNN is another relatively simple algorithm that can easily be visualized and interpreted. However, performance can degrade at boundary conditions and when regions are not covered well with samples. Generally, we need a lot of data to cover our feature space; however, it appears that KNN performs well on the test set even when trained on only 100 samples. This could be because KNN is an instance-based algorithm: it is highly dependent on the training data – the first split represents our feature space almost as well as the whole dataset (when evaluated on our test set). We would expect this to vary with different splits. Furthermore, if we are doing a lot of predictions compared to training, it may not be well suited for our task.</p>
 </blockquote>
 </li>
 <li><p>Given what you know about the data so far, why did you choose this model to apply?</p>
-<blockquote><p>The Decision Tree struggled and overfit quickly with <code>max_depth &gt; 2</code>. We wanted to identify whether students would cluster in our feature space, as Decision Trees are not quite as good at identifying correlations across many features. KNN is a simple way to achieve this sort of clustering by performing a distance metric. It appears as though KNN achieves similar testing error on the data as the Decision Tree.</p>
+<blockquote><p>The Decision Tree struggled and overfit quickly with <code>max_depth &gt; 2</code>. We wanted to identify whether students would cluster in our feature space, as Decision Trees are not quite as good at identifying subtle correlations across many features: they split on the best feature at every iteration. KNN is a simple way to achieve this sort of clustering by performing a distance metric. It appears as though KNN achieves similar testing error on the data as the Decision Tree.</p>
 </blockquote>
 </li>
 </ul>
@@ -12489,18 +12633,18 @@ Test set: 95 samples
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Model-3:-Boosted-Decision-Tree">Model 3: Boosted Decision Tree<a class="anchor-link" href="#Model-3:-Boosted-Decision-Tree">&#182;</a></h2>
+<h2 id="Model-3:-Support-Vector-Machine">Model 3: Support Vector Machine<a class="anchor-link" href="#Model-3:-Support-Vector-Machine">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[169]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">AdaBoostClassifier</span>
-<span class="n">est</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">est</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
 <span class="n">display</span><span class="p">(</span><span class="n">train_and_evaluate_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">))</span>
 </pre></div>
 
@@ -12531,26 +12675,26 @@ Test set: 95 samples
     <tr>
       <th>0</th>
       <td>100</td>
-      <td>0.885714</td>
-      <td>0.712121</td>
-      <td>0.019528</td>
-      <td>0.001905</td>
+      <td>0.884615</td>
+      <td>0.777778</td>
+      <td>0.003896</td>
+      <td>0.001073</td>
     </tr>
     <tr>
       <th>1</th>
       <td>200</td>
-      <td>0.827586</td>
-      <td>0.746032</td>
-      <td>0.028531</td>
-      <td>0.002965</td>
+      <td>0.882353</td>
+      <td>0.778523</td>
+      <td>0.003995</td>
+      <td>0.002403</td>
     </tr>
     <tr>
       <th>2</th>
       <td>300</td>
-      <td>0.829596</td>
-      <td>0.818182</td>
-      <td>0.040533</td>
-      <td>0.002442</td>
+      <td>0.870488</td>
+      <td>0.797297</td>
+      <td>0.008295</td>
+      <td>0.004013</td>
     </tr>
   </tbody>
 </table>
@@ -12570,15 +12714,15 @@ Test set: 95 samples
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li><p>What is the theoretical O(n) time &amp; space complexity in terms of input size?</p>
-<blockquote><p>We decided to try to combine multiple decision tree classifiers in the form of boosting. The running time is simply the number of estimators <code>N</code> times the run time of each individual estimator. Since we are using decision trees, we can plug in our decision tree performance to get $O(N *D * n * log(n))$. The space complexity is similarly scaled by the number of estimators present, and depends on the max_depth of each tree: <code>O(N * max_depth)</code>.</p>
+<blockquote><p>Support Vector Machines have a worst case running time of <a href="http://scikit-learn.org/stable/modules/svm.html#complexity">O(D * n^3)</a>. This makes them much more expensive to train then either of our two previous models. This makes it hard to scale to applications with many samples. The space complexity is generally O(D * n) but can increase drastically based on caching optimizations used for algorithm performance.</p>
 </blockquote>
 </li>
 <li><p>What are the general applications of this model? What are its strengths and weaknesses?</p>
-<blockquote><p>Boosting tends to be very robust to overfitting, and often provides better results then individual decision tree classifiers. However, it results in high model complexity and can be harder to interpret, especially if there are many estimators in the model. The key to boosting is using 'weak' classifiers, so we set max_depth to one (which also provided the best results).</p>
+<blockquote><p>Support Vector Machines use quadratic programming to find the optimal hyperplane to seperate two groups. SVMs often perform better then other classification methods because the optimal seperator on training is often superior to other seperators on testing data. Using the kernal trick, SVMs can also implicitely map features to higher dimensions, which can uncover patterns in data other algorithms can not. However, these complexities also result in less interpretable results then KNN or Decision Trees, and a much worse running complexity.</p>
 </blockquote>
 </li>
 <li><p>Given what you know about the data so far, why did you choose this model to apply?</p>
-<blockquote><p>KNN failed to perform better then the individual decision trees, so we decided to try Adaboost as it often performs better then a simple decision tree. The boosted tree performed slightly better then an individual tree, but not by much.</p>
+<blockquote><p>KNN and Decision Trees seemed to perform similarly, I wanted to try SVMs to see if we could uncover some other patterns in the data. It seems like SVMs performed reasonabily well with no hyperparameter tuning.</p>
 </blockquote>
 </li>
 </ul>
@@ -12601,35 +12745,16 @@ Test set: 95 samples
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>After analysis of the data we determined the best predictive metric for success was the percent of failures students had. Adding other metrics failed to give us any better indicator of students at risk for failure. Students with a failure rate higher then <code>0.5</code> should be given extra help. The model we chose to assess this dataset was a decision tree, which is relatively simple to train, and very simple to predict. In fact, the best machine learning solution we found for this dataset is so simple it could be performed by a human. Therefore it will also be computationally inexpensive.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To make a prediction, the Decision Tree model looks at an individaul's failure rates, and flags them if they are greater than <code>0.5</code>. This was the best indicator of failure we found by looking at the dataset. There seems to be no correlation between other features and student success.</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[192]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
-<span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">AdaBoostClassifier</span>
 
+<span class="c1"># Note: target variable is also transformed from [&quot;yes&quot;, &quot;no&quot;] to [1, 0]</span>
 <span class="n">scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">)</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
@@ -12674,8 +12799,8 @@ Test set: 95 samples
       <td>300</td>
       <td>0.810811</td>
       <td>0.81203</td>
-      <td>5.40364</td>
-      <td>0.000323</td>
+      <td>6.313926</td>
+      <td>0.000327</td>
     </tr>
   </tbody>
 </table>
@@ -12686,10 +12811,10 @@ Test set: 95 samples
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;n_estimators&#39;: 1, &#39;base_estimator&#39;: DecisionTreeClassifier(class_weight=None, criterion=&#39;gini&#39;, max_depth=1,
+<pre>{&#39;base_estimator&#39;: DecisionTreeClassifier(class_weight=None, criterion=&#39;gini&#39;, max_depth=1,
             max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
             min_samples_split=2, min_weight_fraction_leaf=0.0,
-            presort=False, random_state=None, splitter=&#39;best&#39;)}
+            presort=False, random_state=None, splitter=&#39;best&#39;), &#39;n_estimators&#39;: 1}
 </pre>
 </div>
 </div>
@@ -12703,18 +12828,61 @@ Test set: 95 samples
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The final model's f1 score is <code>0.811</code> on the training data, and <code>0.812</code> on the testing data. Our testing and training scores are very similar, which indicates that we have little variance in this model. However, we could be over generalizing, as the data did not seem to provide us much insight beyond what would have been a logical decision (splitting on failure rate). Perhaps with more data we could better cover our feature space, and determine some correlation between other features.</p>
-<p>Note: Adaboost's best performance is actually with a single decision stump! Therefore we went with a single decision tree as our final model. Even though the <code>f1_test</code> score for <code>n_estimators=10</code> is better then that for <code>n_estimators=1</code>, the GridSearch determined that there is a lower training and cross-validation error with <code>n_estimators=1</code>. We should never use our testing data to make decisions about tuning our model, therefore we went with the lower cross-validation error.</p>
+<h2 id="Final-Model">Final Model<a class="anchor-link" href="#Final-Model">&#182;</a></h2><p>The final model we chose to deploy in production is <strong>a simple decision tree</strong>. We found that a one stump decision tree has a <strong>slightly better <code>f1_score</code></strong> then KNN or SVM, while having <strong>a lower time complexity</strong>. By running Adaboost with GridSearch, we also saw that there was no added benefit of using multiple decision tree stumps, and that <code>max_depth=1</code> is the optimal depth parameter for the tree. Therefore, <strong>Model #1</strong> is our final model.</p>
+<p>Even though the <code>f1_test</code> score for <code>n_estimators=10</code> is better then that for <code>n_estimators=1</code>, the GridSearch determined that there is a lower training and cross-validation error with <code>n_estimators=1</code>. We should never use our testing data to make decisions about tuning our model, therefore we went with the parameters determined by GridSearchCV.</p>
+<p>Through analysis of the data we determined the best predictive metric for success was the percent of failures. Incorperating other metrics failed to give us any better indicator of students at risk for failure. Students with a failure rate higher then <code>0.5</code> should be given extra help.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[188]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">export_graphviz</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">accuracy_score</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing accuracy: </span><span class="si">{:.2f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">metric_func</span><span class="o">=</span><span class="n">accuracy_score</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Testing accuracy: 73.68%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reasoning">Reasoning<a class="anchor-link" href="#Reasoning">&#182;</a></h2><p>The final model's f1 score is <code>0.811</code> on the training data, and <code>0.812</code> on the testing data. Our testing and training scores are very similar, which indicates that we have little variance in this model. However, we could be over generalizing, as the data did not seem to provide us much insight beyond what would have been a logical decision (splitting on failure rate). Perhaps with more data we could better cover our feature space, and determine some correlation between other features.</p>
+<p>While <code>f1_score</code> maximizes both precision and recall, we notice our accuracy is still pretty low, at around <code>74%</code>. If there is a low economic cost of flagging students as at risk to fail, we may want to focus on maximizing our precision. This would result in more false positives, but also more true positives which could be more important to us. This is something for the committee to decide.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Code to build decision tree visualization</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">export_graphviz</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>  
 <span class="kn">import</span> <span class="nn">pydotplus</span> <span class="k">as</span> <span class="nn">pydot</span>
 
@@ -12727,7 +12895,6 @@ Test set: 95 samples
                 <span class="n">feature_names</span><span class="o">=</span><span class="n">X_all</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>  
                 <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
                 <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">graphviz</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">dot_graph</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -12743,7 +12910,7 @@ Test set: 95 samples
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[188]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[51]:</div>
 
 <div class="output_svg output_subarea output_execute_result">
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -12790,6 +12957,153 @@ Test set: 95 samples
 <path fill="none" stroke="black" d="M149.827,-85.9375C156.377,-77.0413 163.531,-67.3236 170.137,-58.352"/>
 <polygon fill="black" stroke="black" points="173.154,-60.158 176.264,-50.0301 167.517,-56.0077 173.154,-60.158"/>
 <text text-anchor="middle" x="180.018" y="-70.5466" font-family="Helvetica,sans-Serif" font-size="14.00">False</text>
+</g>
+</g>
+</svg>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-it-works">How it works<a class="anchor-link" href="#How-it-works">&#182;</a></h2><h3 id="Training">Training<a class="anchor-link" href="#Training">&#182;</a></h3><p>Decision Trees are a recursive algorithm that build a tree by making binary decisions to classify data. At each iteration, the algorithm looks at the feature which best splits the data, resulting in the most accurate predictions. Successive splits are independent of one another. For example, the example decision tree below first looks at the rate of failures of a student, as this was the feature with the best prediction rate.</p>
+<h3 id="Prediction">Prediction<a class="anchor-link" href="#Prediction">&#182;</a></h3><p>For students with a failure rate <code>&lt;= 0.5</code>, it looks at students with <code>schoolsup &gt; 0.5</code> and flags them as at risk for failure. <code>schoolsup</code> (supplementary school work) was indicated as the best splitting feature after a failure rate of <code>&lt;= 0.5</code>. For students with a failure rate of <code>&gt; 0.5</code> it looks at students with absenses <code>&gt; 17.5</code>, and flags them as at risk to fail. Students with <code>&lt;= 17.5</code> absenses are not flagged.</p>
+<h2 id="Our-Final-Tree">Our Final Tree<a class="anchor-link" href="#Our-Final-Tree">&#182;</a></h2><p>We found that the optimal tree only had one node: an individaul's failure rates. It flags them if they are greater than <code>0.5</code>. This was the best indicator of failure we found by looking at the dataset. While adding more nodes reduced our training error, it did not reduce our testing error: there seems to be more successive correlation between other features and student success. See the visualization below to see the result of the decision tree trained on our training data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example-Graph">Example Graph<a class="anchor-link" href="#Example-Graph">&#182;</a></h2><p>For illustration only, this was not optimal.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_graph</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[41]:</div>
+
+<div class="output_svg output_subarea output_execute_result">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: Tree Pages: 1 -->
+<svg width="505pt" height="258pt"
+ viewBox="0.00 0.00 505.23 258.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 254)">
+<title>Tree</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-254 501.234,-254 501.234,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node"><title>0</title>
+<path fill="#399de5" fill-opacity="0.537255" stroke="black" d="M307.87,-250C307.87,-250 212.043,-250 212.043,-250 206.043,-250 200.043,-244 200.043,-238 200.043,-238 200.043,-198 200.043,-198 200.043,-192 206.043,-186 212.043,-186 212.043,-186 307.87,-186 307.87,-186 313.87,-186 319.87,-192 319.87,-198 319.87,-198 319.87,-238 319.87,-238 319.87,-244 313.87,-250 307.87,-250"/>
+<text text-anchor="start" x="219.929" y="-234.8" font-family="Helvetica,sans-Serif" font-size="14.00">failures ≤ 0.5</text>
+<text text-anchor="start" x="219.672" y="-220.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.4328</text>
+<text text-anchor="start" x="214.234" y="-206.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 300</text>
+<text text-anchor="start" x="208" y="-192.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [95, 205]</text>
+</g>
+<!-- 1 -->
+<g id="node2" class="node"><title>1</title>
+<path fill="#399de5" fill-opacity="0.670588" stroke="black" d="M239.87,-150C239.87,-150 144.043,-150 144.043,-150 138.043,-150 132.043,-144 132.043,-138 132.043,-138 132.043,-98 132.043,-98 132.043,-92 138.043,-86 144.043,-86 144.043,-86 239.87,-86 239.87,-86 245.87,-86 251.87,-92 251.87,-98 251.87,-98 251.87,-138 251.87,-138 251.87,-144 245.87,-150 239.87,-150"/>
+<text text-anchor="start" x="142.974" y="-134.8" font-family="Helvetica,sans-Serif" font-size="14.00">schoolsup ≤ 0.5</text>
+<text text-anchor="start" x="151.672" y="-120.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.3718</text>
+<text text-anchor="start" x="146.234" y="-106.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 239</text>
+<text text-anchor="start" x="140" y="-92.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [59, 180]</text>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge"><title>0&#45;&gt;1</title>
+<path fill="none" stroke="black" d="M238.441,-185.992C232.364,-177.234 225.668,-167.585 219.298,-158.404"/>
+<polygon fill="black" stroke="black" points="222.142,-156.363 213.566,-150.142 216.391,-160.354 222.142,-156.363"/>
+<text text-anchor="middle" x="209.12" y="-170.544" font-family="Helvetica,sans-Serif" font-size="14.00">True</text>
+</g>
+<!-- 4 -->
+<g id="node5" class="node"><title>4</title>
+<path fill="#e58139" fill-opacity="0.305882" stroke="black" d="M376.099,-150C376.099,-150 281.814,-150 281.814,-150 275.814,-150 269.814,-144 269.814,-138 269.814,-138 269.814,-98 269.814,-98 269.814,-92 275.814,-86 281.814,-86 281.814,-86 376.099,-86 376.099,-86 382.099,-86 388.099,-92 388.099,-98 388.099,-98 388.099,-138 388.099,-138 388.099,-144 382.099,-150 376.099,-150"/>
+<text text-anchor="start" x="277.636" y="-134.8" font-family="Helvetica,sans-Serif" font-size="14.00">absences ≤ 17.5</text>
+<text text-anchor="start" x="288.672" y="-120.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.4837</text>
+<text text-anchor="start" x="287.127" y="-106.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 61</text>
+<text text-anchor="start" x="280.893" y="-92.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [36, 25]</text>
+</g>
+<!-- 0&#45;&gt;4 -->
+<g id="edge4" class="edge"><title>0&#45;&gt;4</title>
+<path fill="none" stroke="black" d="M281.789,-185.992C287.955,-177.234 294.749,-167.585 301.213,-158.404"/>
+<polygon fill="black" stroke="black" points="304.134,-160.334 307.03,-150.142 298.411,-156.304 304.134,-160.334"/>
+<text text-anchor="middle" x="311.307" y="-170.574" font-family="Helvetica,sans-Serif" font-size="14.00">False</text>
+</g>
+<!-- 2 -->
+<g id="node3" class="node"><title>2</title>
+<path fill="#399de5" fill-opacity="0.721569" stroke="black" d="M107.87,-50C107.87,-50 12.0434,-50 12.0434,-50 6.04343,-50 0.0434256,-44 0.0434256,-38 0.0434256,-38 0.0434256,-12 0.0434256,-12 0.0434256,-6 6.04343,-0 12.0434,-0 12.0434,-0 107.87,-0 107.87,-0 113.87,-0 119.87,-6 119.87,-12 119.87,-12 119.87,-38 119.87,-38 119.87,-44 113.87,-50 107.87,-50"/>
+<text text-anchor="start" x="19.6724" y="-34.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.3398</text>
+<text text-anchor="start" x="14.2344" y="-20.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 212</text>
+<text text-anchor="start" x="8" y="-6.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [46, 166]</text>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge2" class="edge"><title>1&#45;&gt;2</title>
+<path fill="none" stroke="black" d="M146.899,-85.9375C132.797,-76.2158 117.272,-65.5132 103.292,-55.8752"/>
+<polygon fill="black" stroke="black" points="105.033,-52.8244 94.8134,-50.0301 101.06,-58.5876 105.033,-52.8244"/>
+</g>
+<!-- 3 -->
+<g id="node4" class="node"><title>3</title>
+<path fill="#399de5" fill-opacity="0.070588" stroke="black" d="M238.084,-50C238.084,-50 149.83,-50 149.83,-50 143.83,-50 137.83,-44 137.83,-38 137.83,-38 137.83,-12 137.83,-12 137.83,-6 143.83,-0 149.83,-0 149.83,-0 238.084,-0 238.084,-0 244.084,-0 250.084,-6 250.084,-12 250.084,-12 250.084,-38 250.084,-38 250.084,-44 244.084,-50 238.084,-50"/>
+<text text-anchor="start" x="153.672" y="-34.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.4993</text>
+<text text-anchor="start" x="152.127" y="-20.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 27</text>
+<text text-anchor="start" x="145.893" y="-6.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [13, 14]</text>
+</g>
+<!-- 1&#45;&gt;3 -->
+<g id="edge3" class="edge"><title>1&#45;&gt;3</title>
+<path fill="none" stroke="black" d="M192.639,-85.9375C192.821,-77.6833 193.018,-68.7219 193.203,-60.3053"/>
+<polygon fill="black" stroke="black" points="196.708,-60.1046 193.428,-50.0301 189.709,-59.9507 196.708,-60.1046"/>
+</g>
+<!-- 5 -->
+<g id="node6" class="node"><title>5</title>
+<path fill="#e58139" fill-opacity="0.470588" stroke="black" d="M371.084,-50C371.084,-50 282.83,-50 282.83,-50 276.83,-50 270.83,-44 270.83,-38 270.83,-38 270.83,-12 270.83,-12 270.83,-6 276.83,-0 282.83,-0 282.83,-0 371.084,-0 371.084,-0 377.084,-0 383.084,-6 383.084,-12 383.084,-12 383.084,-38 383.084,-38 383.084,-44 377.084,-50 371.084,-50"/>
+<text text-anchor="start" x="286.672" y="-34.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.4522</text>
+<text text-anchor="start" x="285.127" y="-20.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 55</text>
+<text text-anchor="start" x="278.893" y="-6.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [36, 19]</text>
+</g>
+<!-- 4&#45;&gt;5 -->
+<g id="edge5" class="edge"><title>4&#45;&gt;5</title>
+<path fill="none" stroke="black" d="M328.274,-85.9375C328.092,-77.6833 327.895,-68.7219 327.711,-60.3053"/>
+<polygon fill="black" stroke="black" points="331.204,-59.9507 327.485,-50.0301 324.205,-60.1046 331.204,-59.9507"/>
+</g>
+<!-- 6 -->
+<g id="node7" class="node"><title>6</title>
+<path fill="#399de5" stroke="black" d="M485.012,-50C485.012,-50 412.901,-50 412.901,-50 406.901,-50 400.901,-44 400.901,-38 400.901,-38 400.901,-12 400.901,-12 400.901,-6 406.901,-0 412.901,-0 412.901,-0 485.012,-0 485.012,-0 491.012,-0 497.012,-6 497.012,-12 497.012,-12 497.012,-38 497.012,-38 497.012,-44 491.012,-50 485.012,-50"/>
+<text text-anchor="start" x="420.352" y="-34.8" font-family="Helvetica,sans-Serif" font-size="14.00">gini = 0.0</text>
+<text text-anchor="start" x="411.021" y="-20.8" font-family="Helvetica,sans-Serif" font-size="14.00">samples = 6</text>
+<text text-anchor="start" x="408.679" y="-6.8" font-family="Helvetica,sans-Serif" font-size="14.00">value = [0, 6]</text>
+</g>
+<!-- 4&#45;&gt;6 -->
+<g id="edge6" class="edge"><title>4&#45;&gt;6</title>
+<path fill="none" stroke="black" d="M369.918,-85.9375C382.617,-76.3076 396.585,-65.7151 409.201,-56.1483"/>
+<polygon fill="black" stroke="black" points="411.415,-58.8613 417.269,-50.0301 407.186,-53.2837 411.415,-58.8613"/>
 </g>
 </g>
 </svg>
