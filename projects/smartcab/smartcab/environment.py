@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 from simulator import Simulator
 
+
 class TrafficLight(object):
     """A traffic light that switches periodically."""
 
@@ -192,6 +193,8 @@ class Environment(object):
                 state['location'] = location
                 state['heading'] = heading
                 reward = 2.0 if action == agent.get_next_waypoint() else -0.5  # valid, but is it correct? (as per waypoint)
+            # elif light == 'red' and agent.get_next_waypoint() != 'right':
+            #     reward = 0.5
             else:
                 # Valid null move
                 reward = 0.0
